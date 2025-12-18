@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useRef, useState } from 'react';
-import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import { useRef, useState } from "react";
+import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 
 interface HotspotProps {
   position: [number, number, number];
@@ -16,7 +16,7 @@ export default function Hotspot({
   position,
   onClick,
   size = 0.5,
-  color = '#d2bab0',
+  color = "#d2bab0",
 }: HotspotProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
@@ -31,13 +31,13 @@ export default function Hotspot({
         new THREE.Vector3(targetScale, targetScale, targetScale),
         0.1
       );
-      
+
       // Pulse animation
       const pulse = Math.sin(state.clock.elapsedTime * 3) * 0.1 + 1;
       if (hovered) {
         meshRef.current.scale.multiplyScalar(pulse);
       }
-      
+
       // Click feedback
       if (clicked) {
         meshRef.current.scale.multiplyScalar(0.9);
@@ -87,10 +87,18 @@ export default function Hotspot({
 }
 
 // Particle effect for hotspot
-function HotspotParticles({ color, size, active }: { color: string; size: number; active: boolean }) {
+function HotspotParticles({
+  color,
+  size,
+  active,
+}: {
+  color: string;
+  size: number;
+  active: boolean;
+}) {
   const pointsRef = useRef<THREE.Points>(null);
   const count = 50;
-  
+
   const positions = new Float32Array(count * 3);
   for (let i = 0; i < count; i++) {
     const theta = Math.random() * Math.PI * 2;
@@ -129,4 +137,3 @@ function HotspotParticles({ color, size, active }: { color: string; size: number
     </points>
   );
 }
-

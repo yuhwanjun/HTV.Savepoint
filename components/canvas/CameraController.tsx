@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useRef, useEffect } from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
-import * as THREE from 'three';
+import { useRef, useEffect } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import * as THREE from "three";
 
 interface CameraControllerProps {
   targetPosition: [number, number, number];
@@ -29,13 +29,18 @@ export default function CameraController({
   // Smooth interpolation each frame
   useFrame((_, delta) => {
     // Lerp camera position
-    camera.position.lerp(targetPosVec.current, 1 - Math.exp(-lerpSpeed * delta));
-    
+    camera.position.lerp(
+      targetPosVec.current,
+      1 - Math.exp(-lerpSpeed * delta)
+    );
+
     // Lerp look-at target
-    currentLookAt.current.lerp(targetLookAtVec.current, 1 - Math.exp(-lerpSpeed * delta));
+    currentLookAt.current.lerp(
+      targetLookAtVec.current,
+      1 - Math.exp(-lerpSpeed * delta)
+    );
     camera.lookAt(currentLookAt.current);
   });
 
   return null;
 }
-

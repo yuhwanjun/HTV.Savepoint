@@ -1,28 +1,25 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { useGameStore } from '@/lib/store/useGameStore';
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function IntroPage() {
   const router = useRouter();
-  const startGame = useGameStore((state) => state.startGame);
   const [isAnimating, setIsAnimating] = useState(false);
 
   const handleStart = () => {
     setIsAnimating(true);
-    startGame();
     setTimeout(() => {
-      router.push('/play');
+      router.push("/tutorial");
     }, 500);
   };
 
   // Particle animation for intro
   useEffect(() => {
     // Add entry animation class
-    document.body.classList.add('intro-active');
+    document.body.classList.add("intro-active");
     return () => {
-      document.body.classList.remove('intro-active');
+      document.body.classList.remove("intro-active");
     };
   }, []);
 
@@ -41,7 +38,9 @@ export default function IntroPage() {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               opacity: 0.2 + Math.random() * 0.3,
-              animation: `float ${5 + Math.random() * 10}s ease-in-out infinite`,
+              animation: `float ${
+                5 + Math.random() * 10
+              }s ease-in-out infinite`,
               animationDelay: `${Math.random() * 5}s`,
             }}
           />
@@ -49,8 +48,10 @@ export default function IntroPage() {
       </div>
 
       {/* Content */}
-      <div 
-        className={`relative z-10 text-center px-8 ${isAnimating ? 'animate-fade-out' : 'animate-fade-in'}`}
+      <div
+        className={`relative z-10 text-center px-8 ${
+          isAnimating ? "animate-fade-out" : "animate-fade-in"
+        }`}
       >
         {/* Title */}
         <h1 className="text-display text-4xl md:text-5xl font-bold text-[var(--color-text-primary)] mb-4 tracking-widest">
@@ -81,15 +82,10 @@ export default function IntroPage() {
           시작하기
         </button>
 
-        {/* Instructions */}
-        <div className="mt-12 space-y-2">
-          <p className="text-[var(--color-text-muted)] text-xs tracking-wider">
-            SAVE × 2 | LOAD × 1
-          </p>
-          <p className="text-[var(--color-text-muted)] text-xs opacity-60">
-            신중하게 사용하세요
-          </p>
-        </div>
+        {/* Hint */}
+        <p className="mt-12 text-[var(--color-text-muted)] text-xs opacity-60">
+          터치하여 시작
+        </p>
       </div>
 
       {/* Corner decorations */}
@@ -100,22 +96,36 @@ export default function IntroPage() {
 
       <style jsx>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0) translateX(0); }
-          25% { transform: translateY(-20px) translateX(10px); }
-          50% { transform: translateY(-10px) translateX(-10px); }
-          75% { transform: translateY(-30px) translateX(5px); }
+          0%,
+          100% {
+            transform: translateY(0) translateX(0);
+          }
+          25% {
+            transform: translateY(-20px) translateX(10px);
+          }
+          50% {
+            transform: translateY(-10px) translateX(-10px);
+          }
+          75% {
+            transform: translateY(-30px) translateX(5px);
+          }
         }
-        
+
         .animate-fade-out {
           animation: fadeOut 0.5s ease-out forwards;
         }
-        
+
         @keyframes fadeOut {
-          from { opacity: 1; transform: scale(1); }
-          to { opacity: 0; transform: scale(0.95); }
+          from {
+            opacity: 1;
+            transform: scale(1);
+          }
+          to {
+            opacity: 0;
+            transform: scale(0.95);
+          }
         }
       `}</style>
     </div>
   );
 }
-

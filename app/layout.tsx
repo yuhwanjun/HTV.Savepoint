@@ -15,12 +15,9 @@ export default function RootLayout({
     <html lang="ko">
       <body className="antialiased">
         <div className="kiosk-container">
-          <div className="kiosk-frame">
-            {children}
-          </div>
+          <div className="kiosk-frame">{children}</div>
         </div>
       </body>
     </html>
   );
 }
-

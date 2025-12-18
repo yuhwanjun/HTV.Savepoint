@@ -7,17 +7,17 @@
   --color-bg-primary: #2d1f17;
   --color-bg-secondary: #4a3728;
   --color-bg-tertiary: #6d5549;
-  
+
   --color-text-primary: #fdf8f6;
   --color-text-secondary: #e0cec7;
   --color-text-muted: #bfa094;
-  
+
   --color-accent: #d2bab0;
   --color-accent-hover: #eaddd7;
-  
+
   --color-border: #8b6f63;
   --color-border-light: #a18072;
-  
+
   /* 9:16 Aspect Ratio */
   --aspect-width: 9;
   --aspect-height: 16;
@@ -35,7 +35,23 @@ body {
   width: 100%;
   overflow: hidden;
   background-color: #1a1210;
-  font-family: 'Geist', system-ui, -apple-system, sans-serif;
+  font-family: "Geist", system-ui, -apple-system, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+div,
+button {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* Kiosk Container - 9:16 centered */
@@ -55,20 +71,22 @@ body {
   height: min(100vh, calc(100vw * 16 / 9));
   background: var(--color-bg-primary);
   overflow: hidden;
-  box-shadow: 
-    0 0 60px rgba(45, 31, 23, 0.8),
-    inset 0 0 100px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 60px rgba(45, 31, 23, 0.8), inset 0 0 100px rgba(0, 0, 0, 0.3);
 }
 
 /* Angular accent borders */
 .kiosk-frame::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 100;
-  background: 
-    linear-gradient(to right, var(--color-border) 2px, transparent 2px) 0 0,
+  background: linear-gradient(
+        to right,
+        var(--color-border) 2px,
+        transparent 2px
+      )
+      0 0,
     linear-gradient(to bottom, var(--color-border) 2px, transparent 2px) 0 0;
   background-size: 100% 100%;
 }
@@ -94,7 +112,7 @@ body {
 
 /* Typography */
 .text-display {
-  font-family: 'Geist Mono', 'Courier New', monospace;
+  font-family: "Geist Mono", "Courier New", monospace;
   letter-spacing: 0.05em;
 }
 
@@ -105,7 +123,7 @@ body {
   background: transparent;
   border: 2px solid var(--color-border);
   color: var(--color-text-primary);
-  font-family: 'Geist Mono', monospace;
+  font-family: "Geist Mono", monospace;
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -122,7 +140,7 @@ body {
 }
 
 .btn-angular::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background: var(--color-bg-secondary);
@@ -189,8 +207,12 @@ body {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
@@ -205,11 +227,22 @@ body {
 }
 
 @keyframes glitch {
-  0%, 100% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
 }
 
 .animate-fade-in {
@@ -224,12 +257,38 @@ body {
   animation: glitch 0.3s ease-in-out;
 }
 
+/* Dialogue fade-in animation */
+@keyframes dialogueFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-dialogueFadeIn {
+  animation: dialogueFadeIn 0.4s ease-out forwards;
+}
+
 /* Stagger delays */
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-400 { animation-delay: 0.4s; }
-.delay-500 { animation-delay: 0.5s; }
+.delay-100 {
+  animation-delay: 0.1s;
+}
+.delay-200 {
+  animation-delay: 0.2s;
+}
+.delay-300 {
+  animation-delay: 0.3s;
+}
+.delay-400 {
+  animation-delay: 0.4s;
+}
+.delay-500 {
+  animation-delay: 0.5s;
+}
 
 /* Custom cursor for kiosk */
 .kiosk-cursor {
@@ -239,4 +298,3 @@ body {
 .kiosk-cursor * {
   cursor: none;
 }
-

@@ -1,12 +1,15 @@
-'use client';
+"use client";
 
-import { useCurrentNode } from '@/lib/store/useGameStore';
-import { getNode } from '@/lib/game/nodes';
-import PointCloudModel from './PointCloudModel';
-import CameraController from './CameraController';
+import { useCurrentNode } from "@/lib/store/useGameStore";
+import { getNode } from "@/lib/game/nodes";
+import PointCloudModel from "./PointCloudModel";
+import CameraController from "./CameraController";
 
 // Camera positions for each phase
-const CAMERA_CONFIGS: Record<string, { position: [number, number, number]; target: [number, number, number] }> = {
+const CAMERA_CONFIGS: Record<
+  string,
+  { position: [number, number, number]; target: [number, number, number] }
+> = {
   p1_beginning: { position: [0, 0, 6], target: [0, 0, 0] },
   p2_before_battle: { position: [2, 1, 5], target: [0, 0, 0] },
   p3_after_victory: { position: [-1, 0.5, 4], target: [0, 0, 0] },
@@ -18,8 +21,9 @@ const CAMERA_CONFIGS: Record<string, { position: [number, number, number]; targe
 export default function SceneManager() {
   const currentNodeId = useCurrentNode();
   const node = getNode(currentNodeId);
-  
-  const cameraConfig = CAMERA_CONFIGS[currentNodeId] || CAMERA_CONFIGS.p1_beginning;
+
+  const cameraConfig =
+    CAMERA_CONFIGS[currentNodeId] || CAMERA_CONFIGS.p1_beginning;
 
   if (!node) {
     return null;
@@ -34,10 +38,7 @@ export default function SceneManager() {
       />
 
       {/* Point Cloud or Placeholder based on node */}
-      <PointCloudModel 
-        nodeId={currentNodeId}
-        nodeType={node.type}
-      />
+      <PointCloudModel nodeId={currentNodeId} nodeType={node.type} />
 
       {/* Background particles for atmosphere */}
       <BackgroundParticles />
@@ -49,7 +50,7 @@ export default function SceneManager() {
 function BackgroundParticles() {
   const count = 200;
   const positions = new Float32Array(count * 3);
-  
+
   for (let i = 0; i < count; i++) {
     positions[i * 3] = (Math.random() - 0.5) * 20;
     positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
@@ -76,4 +77,3 @@ function BackgroundParticles() {
     </points>
   );
 }
-
